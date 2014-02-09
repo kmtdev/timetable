@@ -142,12 +142,12 @@ li.lesson:not(:last-child) {
 	opacity: 0.75;
 	position: fixed;
 	bottom: 10px;
-	width: 192px;
+	width: 162px;
 	text-align: center;
 	padding: 29px;
 	left: 50%;
 	color: #fff;
-	margin-left: -100px;
+	margin-left: -110px;
 	background: #ff2d55;
 	border-radius: 10px;
 }
