@@ -1,0 +1,194 @@
+@font-face { font-family: "Open Sans"; font-weight: 400; src: url(../res/open-sans.woff); }
+@font-face { font-family: "Open Sans"; font-weight: 600; src: url(../res/open-sans-semi-bold.woff); }
+
+@-webkit-keyframes slide {
+	0% { opacity: 0; }
+}
+
+*[data-icon] {
+	text-indent: 100%;
+	overflow: hidden;
+	width: 18px;
+	background: no-repeat 50%;
+	background-size: 1.4em;
+	display: inline-block;
+	vertical-align: top;
+}
+
+*[data-icon=export] {
+	background-image: url(../res/export.svg);
+}
+
+*[data-icon=user-group] {
+	background-image: url(../res/user-group.svg);
+}
+
+html, body { height: 100%; }
+dl, h1, dd, ol, menu, select { margin: 0; }
+ol, ul, menu, select { padding: 0; }
+main, dt h1, ul { -webkit-box-flex: 1; flex: 1; }
+select, dt h1, time sup { text-transform: uppercase; }
+select, dt h1, time { color: #fff; text-shadow: 0 0 5px rgba(0, 0, 0, 0.25); }
+time, select, dt h1 { line-height: 1; }
+time, main, label[data-icon], select { display: block; }
+
+b { font-weight: 600; }
+li { list-style: none; }
+template { display: none; }
+time { position: relative; }
+
+time sup {
+	font-size: 11px;
+	font-weight: 400;
+	position: absolute;
+	left: 0; top: -15px;
+}
+
+html {
+	cursor: default;
+	font: 400 15px/1.4 "Open Sans", sans-serif;
+	color: #8e8e93;
+	background: #f7f7f7;
+}
+
+body {
+	max-width: 768px;
+	margin: auto;
+	display: -webkit-box;
+	display: flex;
+	-webkit-box-orient: vertical;
+	flex-direction: column;
+}
+
+menu {
+	display: -webkit-box;
+	display: flex;
+	background: -webkit-linear-gradient(left, #ef4db6, #c643fc);
+	background: -moz-linear-gradient(left, #ef4db6, #c643fc);
+	background: linear-gradient(left, #ef4db6, #c643fc);
+}
+
+label[data-icon] {
+	width: 75px !important;
+	-webkit-filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.25));
+}
+
+select {
+	-webkit-box-flex: 1;
+	flex: 1;
+	border-radius: 0;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	font-family: inherit;
+	background: none;
+	width: 100%;
+	-webkit-appearance: none;
+}
+
+main.loading { background: url(../res/loading.svg) no-repeat 50%; }
+main.loading dl { opacity: 0.5; }
+
+dl {
+	-webkit-animation: slide 0.5s ease-in-out;
+	-webkit-transition: opacity 0.5s ease-in-out;
+}
+
+dt {
+	background: -webkit-linear-gradient(left, #c644fc, #5856d6);
+	background: -moz-linear-gradient(left, #c644fc, #5856d6);
+	background: linear-gradient(left, #c644fc, #5856d6);
+	display: -webkit-box;
+	display: flex;
+}
+
+dt.today {
+	background: -webkit-linear-gradient(left, #1ad6fd, #1d62f0);
+	background: -moz-linear-gradient(left, #1ad6fd, #1d62f0);
+	background: linear-gradient(left, #1ad6fd, #1d62f0);
+}
+
+li.block {
+	display: -webkit-box;
+	display: flex;
+	padding: 25px 75px 25px 0;
+	min-height: 50px;
+}
+
+li.block:not(:last-child) {
+	border-bottom: 1px solid #c7c7cc;
+}
+
+aside {
+	display: -webkit-box;
+	display: flex;
+	-webkit-box-orient: vertical;
+	flex-direction: column;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+}
+
+aside time {
+	padding: 0 4px;
+	font-size: 13px;
+	line-height: 21px;
+}
+
+aside time.from { background: #ffcc00; }
+aside time.to { background: #ff2d55; }
+
+ul {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-box-pack: center;
+	align-self: center;
+}
+
+li.lesson:not(:last-child) {
+	margin-bottom: 14px;
+}
+
+#add {
+	opacity: 0.75;
+	position: fixed;
+	bottom: 10px;
+	width: 156px;
+	text-align: center;
+	padding: 22px;
+	left: 50%;
+	color: #fff;
+	margin-left: -100px;
+	background: #ff2d55;
+	border-radius: 10px;
+}
+
+#add::after {
+	content: "";
+	position: absolute;
+	border: 5px solid transparent;
+	border-top-color: #ff2d55;
+	bottom: -10px;
+	left: 50%;
+	margin-left: -5px;
+}
+
+#add:not(.show) { display: none; }
+
+select, dt h1, dt time {
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 100px;
+}
+
+dt time, time sup, aside {
+	width: 75px;
+	text-align: center;
+}
+
+html, select {
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: none;
+	-webkit-tap-highlight-color: transparent;
+}

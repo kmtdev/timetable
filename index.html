@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="icon" href="res/icon.png">
+		<link rel="apple-touch-icon-precomposed" href="res/touch-icon.png">
+		<title>Timetable</title>
+		<script src="js/helpers.min.js"></script>
+		<script src="js/timetable.min.js"></script>
+	</head>
+	<body>
+		<menu>
+			<label data-icon="user-group" for="group">Group</label>
+			<select id="group">
+				<option>IAD1</option>
+				<option>GDD1-A</option>
+				<option>GDD1-B</option>
+				<option>GAR1-A</option>
+				<option>GAR1-B</option>
+			</select>
+		</menu>
+		<main id="root">
+		</main>
+		<footer id="add">
+			Press <span data-icon="export">export</span>, and choose “Add to Home Screen”.
+		</footer>
+		<template id="timetable">
+			<dl>
+				{% this.forEach(function (day) { %}
+				{% var date = $.days[day.date.getDate()] || day.date.format("l"); %}
+				<dt class="{%= date.toLowerCase() %}">
+					<time datetime="{%= day.date %}">
+						<sup>{%= day.date.format("M") %}</sup>
+						{%= day.date.format("d") %}
+					</time>
+					<h1>{%= date %}</h1>
+				</dt>
+				<dd>
+					<ol>
+						{% day.blocks.forEach(function (block) { %}
+						<li class="block">
+							<aside>
+								<time datetime="{%= block.from %}" class="from">{%= block.from.format("H:i") %}</time>
+								<time datetime="{%= block.from %}" class="to">{%= block.to.format("H:i") %}</time>
+							</aside>
+							<ul>
+								{% block.lessons.forEach(function (lesson) { %}
+								<li class="lesson">
+									<b>{%= lesson.course %}</b>
+									{% if (lesson.teacher) { %} from <b>{%= lesson.teacher %}</b>{% } %}
+									{% if (lesson.room) { %} in <b>{%= lesson.room %}</b>{% } %}
+								</li>
+								{% }); %}
+							</ul>
+						</li>
+						{% }); %}
+					</ol>
+				</dd>
+				{% }); %}
+			</dl>
+		</template>
+	</body>
+</html>
