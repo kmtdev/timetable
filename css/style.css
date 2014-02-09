@@ -164,7 +164,7 @@ li.lesson:not(:last-child) {
 
 #add:not(.show) { display: none; }
 
-select, dt h1, dt time {
+select, dt h1, dt time, label[data-icon] {
 	font-size: 20px;
 	line-height: 100px;
 }

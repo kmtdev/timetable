@@ -46,7 +46,7 @@
 			this.router.match();
 			this.group.addEventListener("change", this.changeGroup, false);
 
-			if (!navigator.standalone && /iPod|iPhone|iPad/.test(navigator.userAgent)) {
+			if (!navigator.standalone && /iPod|iPhone/.test(navigator.userAgent)) {
 				window.add.classList.add("show");
 			}
 		},
