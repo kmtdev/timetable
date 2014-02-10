@@ -82,7 +82,7 @@ dl {
 dt {
 	background: -webkit-linear-gradient(top, #c644fc, #5856d6);
 	background: -moz-linear-gradient(top, #c644fc, #5856d6);
-	background: linear-gradient(top, #FF5E3A, #FF2A68);
+	background: linear-gradient(top, #c644fc, #5856d6);
 }
 
 dt.today {
