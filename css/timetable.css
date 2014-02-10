@@ -24,7 +24,7 @@ ol, ul, menu, select { padding: 0; }
 main, dt h1, ul, select { -webkit-box-flex: 1; flex: 1; }
 select, dt h1, time { text-transform: uppercase; color: #fff; }
 time, main, label[data-icon], select { display: block; }
-dt time, time sup, aside, label[data-icon] { width: 75px; }
+dt time, time sup, aside, label[data-icon] { width: 100px; }
 b, select, dt h1, dt time { font-weight: 700; }
 label, select { cursor: pointer; }
 body, menu, dt, aside, li.block { display: -webkit-box; display: flex; }
@@ -36,11 +36,10 @@ template { display: none; }
 time { position: relative; text-align: center; }
 
 time sup {
-	line-height: 1;
-	font-size: 11px;
 	position: absolute;
-	left: 0; top: 30px;
+	left: 0; top: -0.5em;
 	font-weight: 400;
+	opacity: 0.5;
 }
 
 html {
@@ -53,6 +52,8 @@ html {
 body {
 	max-width: 768px;
 	margin: auto;
+	-webkit-box-direction: reverse;
+	flex-direction: column-reverse;
 }
 
 menu {
@@ -92,12 +93,12 @@ dt.today {
 }
 
 li.block {
-	padding: 25px 75px 25px 0;
+	padding: 25px 100px 25px 0;
 	min-height: 50px;
 }
 
 li.block:not(:last-child) {
-	border-bottom: 1px solid #c7c7cc;
+	border-bottom: 2px solid #c7c7cc;
 }
 
 aside {
@@ -111,6 +112,7 @@ aside time {
 	width: 40px;
 	font-size: 13px;
 	line-height: 21px;
+	border-radius: 4px;
 }
 
 aside time.from { background: #ffcc00; }
@@ -137,8 +139,12 @@ menu, dt {
 	background-attachment: fixed !important;
 }
 
+menu, main {
+	-webkit-box-direction: normal;
+}
+
 #add {
-	opacity: 0.75;
+	opacity: 0.8;
 	position: fixed;
 	bottom: 10px;
 	width: 162px;
@@ -163,3 +169,13 @@ menu, dt {
 }
 
 #add:not(.show) { display: none; }
+
+@media screen and (max-width: 320px) {
+	li.block { padding-right: 75px; }
+	dt time, time sup, aside, label[data-icon] { width: 75px; }
+}
+
+@media screen and (min-width: 769px) {
+	dt { border-radius: 4px; }
+	main:empty + menu, dt:first-child { border-radius: 0 0 4px 4px; }
+}
