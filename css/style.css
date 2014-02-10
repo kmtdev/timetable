@@ -1,3 +1,6 @@
+@font-face { font-family: ASAP; font-weight: 400; src: url(../res/asap.woff); }
+@font-face { font-family: ASAP; font-weight: 700; src: url(../res/asap-bold.woff); }
+
 @-webkit-keyframes fade {
 	0% { opacity: 0; }
 }
@@ -22,9 +25,9 @@ main, dt h1, ul { -webkit-box-flex: 1; flex: 1; }
 select, dt h1, time { text-transform: uppercase; color: #fff; }
 time, select, dt h1, time sup { line-height: 1; }
 time, main, label[data-icon], select { display: block; }
-dt time, time sup, aside, #add { text-align: center; }
+dt time, time sup, aside { text-align: center; }
 dt time, time sup, aside, label[data-icon] { width: 75px; }
-b, select, dt h1, dt time { font-weight: 500; }
+b, select, dt h1, dt time { font-weight: 700; }
 
 li { list-style: none; }
 template { display: none; }
@@ -32,14 +35,13 @@ time { position: relative; }
 
 time sup {
 	font-size: 11px;
-	font-weight: 400;
 	position: absolute;
 	left: 0; top: 30px;
 }
 
 html {
 	cursor: default;
-	font: 400 15px/1.4 "Helvetica Neue", sans-serif;
+	font: 400 15px/1.4 ASAP, sans-serif;
 	color: #8e8e93;
 	background: #f7f7f7;
 }
@@ -119,7 +121,7 @@ aside {
 }
 
 aside time {
-	padding: 0 4px;
+	width: 40px;
 	font-size: 13px;
 	line-height: 21px;
 }
@@ -150,6 +152,7 @@ li.lesson:not(:last-child) {
 	margin-left: -110px;
 	background: #ff2d55;
 	border-radius: 10px;
+	text-align: center;
 }
 
 #add::after {

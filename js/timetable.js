@@ -32,9 +32,6 @@
 		days: {},
 		date: new Date(),
 		main: function () {
-			this.root = window.root;
-			this.group = window.group;
-
 			this.request = new Request(this.requestCallback);
 			this.router = new Router();
 			this.template = new Template(window.timetable);
@@ -44,14 +41,16 @@
 			this.days[this.date.getDate() - 1] = "Yesterday";
 
 			this.router.match();
-			this.group.addEventListener("change", this.changeGroup, false);
 
 			if (!navigator.standalone && /iPod|iPhone/.test(navigator.userAgent)) {
 				window.add.classList.add("show");
 			}
+
+			window.group.addEventListener("change", this.changeGroup, false);
 		},
 		changeGroup: function () {
 			this.blur();
+
 			storage.group = this.value;
 			location.hash = "#!/{}".format(this.value);
 		},
@@ -77,14 +76,15 @@
 			});
 		},
 		requestCallback: function () {
-			$.root.classList.remove("loading");
-			$.root.innerHTML = $.template.render($.parseData(this.response));
+			window.root.classList.remove("loading");
+			window.root.innerHTML = $.template.render($.parseData(this.response));
+
 			$.scrollToToday();
 		}
 	};
 
 	Request.prototype.get = function (parameters) {
-		$.root.classList.add("loading");
+		window.root.classList.add("loading");
 
 		this.xhr.open("GET", $.endpoint.format(parameters), true);
 		this.xhr.setRequestHeader("Accept", "application/json");
@@ -97,7 +97,7 @@
 		if (hash !== undefined) {
 			this.route = hash.split("/");
 
-			$.group.value = this.route[0];
+			window.group.value = this.route[0];
 			$.request.get({
 				group: this.route[0],
 				date: this.route[1] || $.date.format("d-m-Y")
