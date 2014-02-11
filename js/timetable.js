@@ -122,6 +122,7 @@
 
 	Template.prototype.render = function (parent, data) {
 		this.range.selectNode(parent);
+
 		return this.range.createContextualFragment(this.source.call(data));
 	};
 
