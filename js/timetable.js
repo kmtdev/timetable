@@ -6,13 +6,13 @@
 		navigator = window.navigator,
 		storage = window.localStorage;
 
+	var Router = function () {
+		window.addEventListener("hashchange", this.match.bind(this), false);
+	};
+
 	var Request = function (callback) {
 		this.xhr = new XMLHttpRequest();
 		this.xhr.addEventListener("load", callback, false);
-	};
-
-	var Router = function () {
-		window.addEventListener("hashchange", this.match.bind(this), false);
 	};
 
 	var Template = function (element) {
@@ -24,7 +24,8 @@
 		source = source.split("%}").join("a.push('");
 		source = "var a=[];a.push('{}');return a.join('');".format(source);
 
-		this.constructor = new Function(source);
+		this.range = document.createRange();
+		this.source = new Function(source);
 	};
 
 	var $ = window.$ = {
@@ -32,8 +33,8 @@
 		days: {},
 		date: new Date(),
 		main: function () {
-			this.request = new Request(this.requestCallback);
 			this.router = new Router();
+			this.request = new Request(this.requestCallback);
 			this.template = new Template(window.timetable);
 
 			this.days[this.date.getDate()] = "Today";
@@ -76,8 +77,19 @@
 			});
 		},
 		requestCallback: function () {
+			var content = window.root.children[0],
+				render = $.template.render(
+					window.root,
+					$.parseData(this.response)
+				);
+
 			window.root.classList.remove("loading");
-			window.root.innerHTML = $.template.render($.parseData(this.response));
+
+			if (content === undefined) {
+				window.root.appendChild(render);
+			} else {
+				window.root.replaceChild(render, content);
+			}
 
 			$.scrollToToday();
 		}
@@ -97,18 +109,20 @@
 		if (hash !== undefined) {
 			this.route = hash.split("/");
 
-			window.group.value = this.route[0];
 			$.request.get({
 				group: this.route[0],
 				date: this.route[1] || $.date.format("d-m-Y")
 			});
+
+			window.group.value = this.route[0];
 		} else {
 			location.hash = "#!/{}".format(storage.group || "GDD1-B");
 		}
 	};
 
-	Template.prototype.render = function (data) {
-		return this.constructor.call(data);
+	Template.prototype.render = function (parent, data) {
+		this.range.selectNode(parent);
+		return this.range.createContextualFragment(this.source.call(data));
 	};
 
 	window.addEventListener("DOMContentLoaded", $.main.bind($), false);

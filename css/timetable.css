@@ -98,7 +98,7 @@ li.block {
 }
 
 li.block:not(:last-child) {
-	border-bottom: 2px solid #c7c7cc;
+	border-bottom: 1px solid #c7c7cc;
 }
 
 aside {
@@ -130,6 +130,7 @@ li.lesson:not(:last-child) {
 }
 
 html, select {
+	-webkit-user-select: none;
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-size-adjust: none;
 	-webkit-tap-highlight-color: transparent;
