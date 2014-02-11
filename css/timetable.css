@@ -19,7 +19,7 @@
 *[data-icon=user-group] { background-image: url(../img/user-group.svg); }
 
 html, body { height: 100%; }
-dl, h1, dd, ol, menu, select { margin: 0; }
+body, dl, h1, dd, ol, menu, select { margin: 0; }
 ol, ul, menu, select { padding: 0; }
 main, dt h1, ul, select { -webkit-box-flex: 1; flex: 1; }
 select, dt h1, time { text-transform: uppercase; color: #fff; }
@@ -52,8 +52,6 @@ html {
 }
 
 body {
-	max-width: 768px;
-	margin: auto;
 	-webkit-box-direction: reverse;
 	flex-direction: column-reverse;
 }
@@ -147,7 +145,7 @@ menu, dt {
 }
 
 menu, main {
-	-webkit-box-direction: normal;
+	-webkit-box-direction: normal; /* iOS fix */
 }
 
 #add {
@@ -180,9 +178,4 @@ menu, main {
 @media screen and (max-width: 320px) {
 	li.block { padding-right: 75px; }
 	dt time, time sup, aside, label[data-icon] { width: 75px; }
-}
-
-@media screen and (min-width: 769px) {
-	dt { border-radius: 4px; }
-	main:empty + menu, dt:first-child { border-radius: 0 0 4px 4px; }
 }

@@ -10,9 +10,9 @@
 		window.addEventListener("hashchange", this.match.bind(this), false);
 	};
 
-	var Request = function (callback) {
+	var Request = function (success) {
 		this.xhr = new XMLHttpRequest();
-		this.xhr.addEventListener("load", callback, false);
+		this.xhr.addEventListener("load", success, false);
 	};
 
 	var Template = function (element) {
@@ -34,8 +34,8 @@
 		date: new Date(),
 		main: function () {
 			this.router = new Router();
-			this.request = new Request(this.requestCallback);
-			this.template = new Template(window.timetable);
+			this.request = new Request(this.success);
+			this.list = new Template(window.list);
 
 			this.days[this.date.getDate()] = "Today";
 			this.days[this.date.getDate() + 1] = "Tomorrow";
@@ -43,7 +43,7 @@
 
 			this.router.match();
 
-			if (!navigator.standalone && /iPod|iPhone/.test(navigator.userAgent)) {
+			if (/iPod|iPhone/.test(navigator.userAgent) && !navigator.standalone) {
 				window.add.classList.add("show");
 			}
 
@@ -62,7 +62,7 @@
 				today.scrollIntoView();
 			}
 		},
-		parseData: function (data) {
+		parse: function (data) {
 			return JSON.parse(data).map(function (day) {
 				return {
 					date: new Date(day.date),
@@ -76,12 +76,9 @@
 				};
 			});
 		},
-		requestCallback: function () {
+		success: function () {
 			var content = window.root.children[0],
-				render = $.template.render(
-					window.root,
-					$.parseData(this.response)
-				);
+				render = $.list.render(window.root, $.parse(this.response));
 
 			window.root.classList.remove("loading");
 
@@ -122,7 +119,6 @@
 
 	Template.prototype.render = function (parent, data) {
 		this.range.selectNode(parent);
-
 		return this.range.createContextualFragment(this.source.call(data));
 	};
 
