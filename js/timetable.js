@@ -10,9 +10,11 @@
 		window.addEventListener("hashchange", this.match.bind(this), false);
 	};
 
-	var Request = function (success) {
+	var Request = function (callback) {
 		this.xhr = new XMLHttpRequest();
-		this.xhr.addEventListener("load", success, false);
+
+		this.xhr.addEventListener("load", callback, false);
+		this.xhr.addEventListener("error", callback, false);
 	};
 
 	var Template = function (element) {
@@ -34,8 +36,10 @@
 		date: new Date(),
 		main: function () {
 			this.router = new Router();
-			this.request = new Request(this.success);
+			this.request = new Request(this.callback);
+
 			this.list = new Template(window.list);
+			this.again = new Template(window.again);
 
 			this.days[this.date.getDate()] = "Today";
 			this.days[this.date.getDate() + 1] = "Tomorrow";
@@ -76,9 +80,11 @@
 				};
 			});
 		},
-		success: function () {
+		callback: function () {
 			var content = window.root.children[0],
-				render = $.list.render(window.root, $.parse(this.response));
+				render = this.status === 200 ?
+					$.list.render(window.root, $.parse(this.response)) :
+					$.again.render(window.root);
 
 			window.root.classList.remove("loading");
 
