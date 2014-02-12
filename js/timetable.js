@@ -31,7 +31,7 @@
 	};
 
 	var $ = window.$ = {
-		endpoint: "http://hku-timetable.eu01.aws.af.cm/:group/:date",
+		endpoint: "http://hku-timetable.eu01.aws.af.cm/{group}/{date}",
 		days: {},
 		date: new Date(),
 		main: function () {
@@ -67,7 +67,7 @@
 			}
 		},
 		parse: function (data) {
-			return JSON.parse(data).map(function (day) {
+			return (data = JSON.parse(data)) ? data.map(function (day) {
 				return {
 					date: new Date(day.date),
 					blocks: day.blocks.map(function (block) {
@@ -75,16 +75,16 @@
 							from: new Date(block.from),
 							to: new Date(block.to),
 							lessons: block.lessons
-						};
+						}
 					})
-				};
-			});
+				}
+			}) : null;
 		},
 		callback: function () {
 			var content = window.root.children[0],
-				render = this.status === 200 ?
-					$.list.render(window.root, $.parse(this.response)) :
-					$.again.render(window.root);
+				data = $.parse(this.response),
+				render = this.status === 200 && data ?
+					$.list.render(window.root, data) : $.again.render(window.root);
 
 			window.root.classList.remove("loading");
 

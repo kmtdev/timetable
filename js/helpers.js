@@ -5,8 +5,8 @@ String.prototype.format = function (data) {
 		data = [].slice.call(arguments);
 	}
 
-	return this.replace(/:(\w+)|\{([0-9])?\}/g, function (undefined, $1, $2) {
-		return data[$1 || $2 || i++];
+	return this.replace(/\{(\w+)?\}/g, function (undefined, $1) {
+		return data[$1 || i++];
 	});
 };
 
