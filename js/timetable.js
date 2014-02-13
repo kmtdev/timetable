@@ -21,7 +21,7 @@
 		var source = element.innerHTML;
 
 		source = source.replace(/\s{2,}/g, "");
-		source = source.replace(/\{%=(.*?)%\}/g, "',$1,'");
+		source = source.replace(/\{\{(.*?)\}\}/g, "',$1,'");
 		source = source.split("{%").join("');");
 		source = source.split("%}").join("a.push('");
 		source = "var a=[];a.push('{}');return a.join('');".format(source);
@@ -67,7 +67,7 @@
 			}
 		},
 		parse: function (data) {
-			return (data = JSON.parse(data)) ? data.map(function (day) {
+			return data && (data = JSON.parse(data)) ? data.map(function (day) {
 				return {
 					date: new Date(day.date),
 					blocks: day.blocks.map(function (block) {
@@ -78,7 +78,7 @@
 						}
 					})
 				}
-			}) : null;
+			}) : false;
 		},
 		callback: function () {
 			var content = window.root.children[0],

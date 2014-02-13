@@ -41,27 +41,27 @@
 			<dl>
 				{% this.forEach(function (day) { %}
 				{% var date = $.days[day.date.getDate()] || day.date.format("l"); %}
-				<dt class="{%= date.toLowerCase() %}">
-					<time datetime="{%= day.date %}">
-						<sup>{%= day.date.format("M") %}</sup>
-						{%= day.date.format("d") %}
+				<dt class="{{ date.toLowerCase() }}">
+					<time datetime="{{ day.date }}">
+						<sup>{{ day.date.format("M") }}</sup>
+						{{ day.date.format("d") }}
 					</time>
-					<h1>{%= date %}</h1>
+					<h1>{{ date }}</h1>
 				</dt>
 				<dd>
 					<ol>
 						{% day.blocks.forEach(function (block) { %}
 						<li class="block">
 							<aside>
-								<time datetime="{%= block.from %}" class="from">{%= block.from.format("H:i") %}</time>
-								<time datetime="{%= block.from %}" class="to">{%= block.to.format("H:i") %}</time>
+								<time datetime="{{ block.from }}" class="from">{{ block.from.format("H:i") }}</time>
+								<time datetime="{{ block.from }}" class="to">{{ block.to.format("H:i") }}</time>
 							</aside>
 							<ul>
 								{% block.lessons.forEach(function (lesson) { %}
 								<li class="lesson">
-									<b>{%= lesson.course %}</b>
-									{% if (lesson.teacher) { %} from <b>{%= lesson.teacher %}</b>{% } %}
-									{% if (lesson.room) { %} in <b>{%= lesson.room %}</b>{% } %}
+									<b>{{ lesson.course }}</b>
+									{% if (lesson.teacher) { %} from <b>{{ lesson.teacher }}</b>{% } %}
+									{% if (lesson.room) { %} in <b>{{ lesson.room }}</b>{% } %}
 								</li>
 								{% }); %}
 							</ul>
