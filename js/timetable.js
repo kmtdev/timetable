@@ -31,7 +31,7 @@
 	};
 
 	var $ = window.$ = {
-		endpoint: "http://hku-timetable.eu01.aws.af.cm/{group}/{date}",
+		endpoint: "https://hku-timetable.herokuapp.com/{group}/{date}",
 		days: {},
 		date: new Date(),
 		main: function () {
