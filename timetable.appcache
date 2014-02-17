@@ -1,0 +1,16 @@
+CACHE MANIFEST
+# v1
+
+CACHE:
+css/timetable.css
+fonts/asap.woff
+fonts/asap-bold.woff
+img/export.svg
+img/loading.svg
+img/reload.svg
+img/user-group.svg
+js/helpers.js
+js/timetable.js
+
+NETWORK:
+*
