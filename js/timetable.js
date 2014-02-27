@@ -30,11 +30,34 @@
 		this.source = new Function(source);
 	};
 
+	var Gesture = function () {
+		document.addEventListener("touchstart", Gesture.touchStart.bind(this), false);
+		document.addEventListener("touchmove", Gesture.touchMove.bind(this), false);
+		document.addEventListener("touchend", Gesture.touchEnd.bind(this), false);
+	};
+
+	Gesture.touchStart = function (event) {
+		this.start = event.touches[0].clientX;
+	};
+
+	Gesture.touchMove = function (event) {
+		this.offset = event.touches[0].clientX;
+	};
+
+	Gesture.touchEnd = function () {
+		var delta = this.offset - this.start,
+			offset = document.body.clientWidth * 0.75;
+
+		if (delta < -offset) { $.setDate(7); }
+		if (delta > offset) { $.setDate(-7); }
+	};
+
 	var $ = window.$ = {
 		endpoint: "https://hku-timetable.herokuapp.com/{group}/{date}",
 		days: {},
 		date: new Date(),
 		main: function () {
+			this.gesture = new Gesture();
 			this.router = new Router();
 			this.request = new Request(this.callback);
 
