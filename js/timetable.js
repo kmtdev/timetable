@@ -37,21 +37,28 @@
 	};
 
 	Gesture.touchStart = function (event) {
-		this.offset = 0;
-		this.start = event.touches[0].clientX;
+		this.moved = false;
+		this.start = {
+			x: event.touches[0].clientX,
+			y: event.touches[0].clientY
+		};
 	};
 
 	Gesture.touchMove = function (event) {
-		this.offset = event.touches[0].clientX;
+		this.moved = true;
+		this.offset = {
+			x: event.touches[0].clientX,
+			y: event.touches[0].clientY
+		};
 	};
 
 	Gesture.touchEnd = function () {
-		if (this.offset) {
-			var delta = this.offset - this.start,
-				offset = document.body.clientWidth / 2;
+		if (this.moved && Math.abs(this.offset.y - this.start.y) < 100) {
+			var delta = this.offset.x - this.start.x,
+				margin = document.body.clientWidth / 3;
 
-			if (delta < -offset) { $.setDate(7); }
-			if (delta > offset) { $.setDate(-7); }
+			if (delta < -margin) { $.setDate(7); }
+			if (delta > margin) { $.setDate(-7); }
 		}
 	};
 
