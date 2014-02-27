@@ -19,20 +19,23 @@
 *[data-icon=export] { background-image: url(../img/export.svg); }
 *[data-icon=user-group] { background-image: url(../img/user-group.svg); }
 *[data-icon=reload] { background-image: url(../img/reload.svg); }
+*[data-icon=next] { background-image: url(../img/next.svg); }
+*[data-icon=prev] { background-image: url(../img/prev.svg); }
 
 html, body { height: 100%; }
-body, dl, h1, dd, ol, menu, select, p { margin: 0; }
+body, ul, dl, h1, dd, ol, menu, select, p { margin: 0; }
 ol, ul, menu, select, button { padding: 0; }
 main, dt h1, ul, select { -webkit-box-flex: 1; flex: 1; }
 select, dt h1, time { text-transform: uppercase; color: #fff; }
-time, main, label[data-icon], select, button[data-icon] { display: block; }
-dt time, time sup, aside, label[data-icon] { width: 100px; }
+time, main, label[data-icon], a[data-icon], select, button[data-icon] { display: block; }
+dt time, time sup, aside, label[data-icon], #date li { width: 100px; }
 b, select, dt h1, dt time { font-weight: 700; }
-label, select, button { cursor: pointer; }
-body, menu, dt, aside, li.block { display: -webkit-box; display: flex; }
-select, dt h1, dt time, label[data-icon], p { font-size: 20px; line-height: 100px; }
+label, select, button, a { cursor: pointer; }
+body, menu, dt, aside, li.block, #date ul { display: -webkit-box; display: flex; }
+select, dt h1, dt time, label[data-icon], a[data-icon], p { font-size: 20px; line-height: 100px; }
 body, aside { -webkit-box-orient: vertical; flex-direction: column; }
 time, p { text-align: center; }
+select, a[data-icon] { width: 100%; }
 
 li { list-style: none; }
 template { display: none; }
@@ -65,8 +68,6 @@ menu {
 	background: -ms-linear-gradient(top, #4a4a4a, #2b2b2b);
 	background: linear-gradient(top, #4a4a4a, #2b2b2b);
 }
-
-select { width: 100%; }
 
 button[data-icon] {
 	width: 50px; height: 50px;
@@ -114,7 +115,14 @@ li.block:not(:last-child) {
 	border-bottom: 1px solid #c7c7cc;
 }
 
-aside {
+li.block ul {
+	align-self: center;
+	display: -webkit-box; /* iOS fix */
+	-webkit-box-orient: vertical;
+	-webkit-box-pack: center;
+}
+
+aside, #date ul {
 	-webkit-box-align: center;
 	align-items: center;
 	-webkit-box-pack: justify;
@@ -130,13 +138,6 @@ aside time {
 
 aside time.from { background: #ffcc00; }
 aside time.to { background: #ff2d55; }
-
-ul {
-	align-self: center;
-	display: -webkit-box; /* iOS fix */
-	-webkit-box-orient: vertical;
-	-webkit-box-pack: center;
-}
 
 li.lesson:not(:last-child) {
 	margin-bottom: 14px;

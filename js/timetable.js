@@ -64,6 +64,8 @@
 
 			if (today !== null) {
 				today.scrollIntoView();
+			} else {
+				window.scrollTo(0, 100);
 			}
 		},
 		parse: function (data) {
@@ -95,6 +97,10 @@
 			}
 
 			$.scrollToToday();
+		},
+		setDate: function (days) {
+			this.date = new Date(this.date.getTime() + (days * 24 * 60 * 60 * 1000));
+			location.hash = "#!/{}/{}".format(storage.group || "GDD1-B", this.date.format("d-m-Y"));
 		}
 	};
 
