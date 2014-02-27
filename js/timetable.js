@@ -37,6 +37,7 @@
 	};
 
 	Gesture.touchStart = function (event) {
+		this.offset = 0;
 		this.start = event.touches[0].clientX;
 	};
 
@@ -45,11 +46,13 @@
 	};
 
 	Gesture.touchEnd = function () {
-		var delta = this.offset - this.start,
-			offset = document.body.clientWidth * 0.75;
+		if (this.offset) {
+			var delta = this.offset - this.start,
+				offset = document.body.clientWidth / 2;
 
-		if (delta < -offset) { $.setDate(7); }
-		if (delta > offset) { $.setDate(-7); }
+			if (delta < -offset) { $.setDate(7); }
+			if (delta > offset) { $.setDate(-7); }
+		}
 	};
 
 	var $ = window.$ = {
