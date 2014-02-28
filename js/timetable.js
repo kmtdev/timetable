@@ -67,6 +67,9 @@
 		days: {},
 		date: new Date(),
 		main: function () {
+			var n = ($.date.getMonth() + 1) + "",
+				j = $.date.getDate();
+
 			this.gesture = new Gesture();
 			this.router = new Router();
 			this.request = new Request(this.callback);
@@ -74,9 +77,9 @@
 			this.list = new Template(window.list);
 			this.again = new Template(window.again);
 
-			this.days[this.date.getDate()] = "Today";
-			this.days[this.date.getDate() + 1] = "Tomorrow";
-			this.days[this.date.getDate() - 1] = "Yesterday";
+			this.days[n + j] = "Today";
+			this.days[n + (j + 1)] = "Tomorrow";
+			this.days[n + (j - 1)] = "Yesterday";
 
 			this.router.match();
 

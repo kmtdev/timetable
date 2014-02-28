@@ -41,7 +41,7 @@
 			<div>
 				<dl>
 					{% this.forEach(function (day) { %}
-					{% var date = $.days[day.date.getDate()] || day.date.format("l"); %}
+					{% var date = $.days[day.date.format("nj")] || day.date.format("l"); %}
 					<dt class="{{ date.toLowerCase() }}">
 						<time datetime="{{ day.date }}">
 							<sup>{{ day.date.format("M") }}</sup>
