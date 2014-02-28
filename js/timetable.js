@@ -33,11 +33,10 @@
 	var Gesture = function () {
 		document.addEventListener("touchstart", Gesture.touchStart.bind(this), false);
 		document.addEventListener("touchmove", Gesture.touchMove.bind(this), false);
-		document.addEventListener("touchend", Gesture.touchEnd.bind(this), false);
 	};
 
 	Gesture.touchStart = function (event) {
-		this.moved = false;
+		this.can = true;
 		this.start = {
 			x: event.touches[0].clientX,
 			y: event.touches[0].clientY
@@ -45,20 +44,21 @@
 	};
 
 	Gesture.touchMove = function (event) {
-		this.moved = true;
-		this.offset = {
-			x: event.touches[0].clientX,
-			y: event.touches[0].clientY
-		};
-	};
-
-	Gesture.touchEnd = function () {
-		if (this.moved && Math.abs(this.offset.y - this.start.y) < 100) {
-			var delta = this.offset.x - this.start.x,
+		if (this.can && Math.abs(event.touches[0].clientY - this.start.y) < 100) {
+			var delta = event.touches[0].clientX - this.start.x,
 				margin = document.body.clientWidth / 3;
 
-			if (delta < -margin) { $.setDate(7); }
-			if (delta > margin) { $.setDate(-7); }
+			if (delta < -margin) {
+				this.can = false;
+				window.root.classList.add("next");
+				$.setDate(7);
+			}
+
+			if (delta > margin) {
+				this.can = false;
+				window.root.classList.add("prev");
+				$.setDate(-7);
+			}
 		}
 	};
 
@@ -124,7 +124,7 @@
 				render = this.status === 200 && data ?
 					$.list.render(window.root, data) : $.again.render(window.root);
 
-			window.root.classList.remove("loading");
+			window.root.classList.remove("prev", "next", "loading");
 
 			if (content === undefined) {
 				window.root.appendChild(render);
