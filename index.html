@@ -2,7 +2,7 @@
 <html manifest="timetable.appcache" lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimal-ui">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<link rel="stylesheet" href="css/timetable.css">
@@ -41,7 +41,7 @@
 			<div>
 				<dl>
 					{% this.forEach(function (day) { %}
-					{% var date = $.days[day.date.format("nj")] || day.date.format("l"); %}
+					{% var date = $.days[day.date.format("Mj")] || day.date.format("l"); %}
 					<dt class="{{ date.toLowerCase() }}">
 						<time datetime="{{ day.date }}">
 							<sup>{{ day.date.format("M") }}</sup>
@@ -55,7 +55,7 @@
 							<li class="block">
 								<aside>
 									<time datetime="{{ block.from }}" class="from">{{ block.from.format("H:i") }}</time>
-									<time datetime="{{ block.from }}" class="to">{{ block.to.format("H:i") }}</time>
+									<time datetime="{{ block.to }}" class="to">{{ block.to.format("H:i") }}</time>
 								</aside>
 								<ul>
 									{% block.lessons.forEach(function (lesson) { %}
