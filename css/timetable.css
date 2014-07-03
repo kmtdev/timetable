@@ -30,11 +30,11 @@
 *[data-icon=next] { background-image: url(../img/next.svg); }
 *[data-icon=prev] { background-image: url(../img/prev.svg); }
 
-html, body { height: 100%; }
 body, ul, dl, h1, dd, ol, menu, select, p { margin: 0; }
 ol, ul, menu, select, button { padding: 0; }
 main, dt h1, ul, select { -webkit-box-flex: 1; flex: 1; }
-select, dt h1, time { text-transform: uppercase; color: #fff; }
+select, dt h1, time { color: #fff; }
+dt h1, time { text-transform: uppercase; }
 time, main, label[data-icon], a[data-icon], select, button[data-icon] { display: block; }
 dt time, time sup, aside, label[data-icon], #date li { width: 100px; }
 b, select, dt h1, dt time { font-weight: 700; }
@@ -44,6 +44,7 @@ select, dt h1, dt time, label[data-icon], a[data-icon], p { font-size: 20px; lin
 body, aside { -webkit-box-orient: vertical; flex-direction: column; }
 time, p { text-align: center; }
 select, a[data-icon] { width: 100%; }
+menu, optgroup, option { background: #4a4a4a; }
 
 li { list-style: none; }
 template { display: none; }
@@ -59,6 +60,7 @@ time sup {
 }
 
 html {
+	height: 100%;
 	cursor: default;
 	font: 400 15px/1.4 ASAP, sans-serif;
 	color: #8e8e93;
@@ -66,11 +68,10 @@ html {
 }
 
 body {
+	min-height: 100%;
 	-webkit-box-direction: reverse;
 	flex-direction: column-reverse;
 }
-
-menu { background: #4a4a4a; }
 
 button[data-icon] {
 	width: 50px; height: 50px;
@@ -86,6 +87,8 @@ select, button {
 	background: none;
 	-webkit-appearance: none;
 }
+
+main { overflow-x: hidden; }
 
 main div {
 	-webkit-transition: opacity 0.2s ease-in-out;

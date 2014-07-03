@@ -83,7 +83,7 @@
 			if (today !== null) {
 				today.scrollIntoView();
 			} else {
-				window.scrollTo(0, 100);
+				root.main.scrollIntoView();
 			}
 		},
 		parse: function (data) {

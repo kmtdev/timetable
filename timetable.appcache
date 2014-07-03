@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v8
+# v28
 
 CACHE:
 css/timetable.css
@@ -9,8 +9,8 @@ img/export.svg
 img/loading.svg
 img/reload.svg
 img/user-group.svg
-js/helpers.js
-js/timetable.js
+js/helpers.min.js
+js/timetable.min.js
 
 NETWORK:
 *

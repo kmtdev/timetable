@@ -1,3 +1,13 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  RewriteRule ^(.*)$ /#!/$1 [R=302, NE]
+</IfModule>
+
 <IfModule mod_mime.c>
   AddType application/javascript  js
   AddType application/font-woff   woff
